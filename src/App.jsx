@@ -1,32 +1,42 @@
 import { useEffect, useState } from 'react'
 import { FoodCard } from './components/FoodCard'
 import { Modal } from './components/Modal'
+import { Toast } from './components/Toast'
 
-const FOODS_API = 'https://cms.trustit-co.com/api/content/hello-world/foods/'
+const FOODS_GET_API =
+  'https://cms.trustit-co.com/api/content/hello-world/foods/'
 
 const App = () => {
   const [foods, setFoods] = useState([])
   const [isModal, setIsModal] = useState(false)
+  const [hasToast, setHasToast] = useState(null)
 
   useEffect(() => {
-    fetch(FOODS_API, {
+    fetch(FOODS_GET_API, {
       Authorization: 'Bearer  {}',
     })
       .then((res) => res.json())
       .then((data) => {
         setFoods(data.items)
         console.log(data.items)
+        setHasToast('🎉🎉 Data has fetched !!')
       })
   }, [])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setHasToast(null)
+    }, 3000)
+  }, [hasToast])
+
   return (
     <main>
-      <h1 className='text-2xl text-center p-4'>🍕🍕🍕</h1>
+      <h1 className='text-2xl text-center p-4'>🍕🍕🍕🍕🍕🍕</h1>
 
       <div className='container mx-auto px-4 max-w-[768px]'>
-        <section className='text-center mt-4 mb-2'>
+        <section className='text-center my-4'>
           <button
-            className='p-2 px-8 bg-gray-200 rounded'
+            className='p-2 px-8 w-full sm:w-auto bg-gradient-to-r from-indigo-400 to-red-400 text-white rounded'
             onClick={() => setIsModal(true)}
           >
             Add Food
@@ -49,7 +59,14 @@ const App = () => {
               ))}
         </section>
       </div>
-      {isModal && <Modal setFoods={setFoods} setIsModal={setIsModal} />}
+      {isModal && (
+        <Modal
+          setFoods={setFoods}
+          setIsModal={setIsModal}
+          setHasToast={setHasToast}
+        />
+      )}
+      {hasToast && <Toast mess={hasToast} />}
     </main>
   )
 }
