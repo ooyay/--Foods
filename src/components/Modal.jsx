@@ -39,7 +39,7 @@ export const Modal = ({ setIsModal, setFoods }) => {
 
     setErr(false)
     setIsModal(false)
-    setFoods((foods) => [...foods, data])
+    setFoods((foods) => [data, ...foods])
   }
 
   return (
