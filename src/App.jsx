@@ -10,6 +10,13 @@ const App = () => {
   const [foods, setFoods] = useState([])
   const [isModal, setIsModal] = useState(false)
   const [hasToast, setHasToast] = useState(null)
+  const [header, setHeader] = useState([
+    ...'🍕'.repeat(Math.floor(innerWidth / 38)),
+  ])
+
+  onresize = () => {
+    setHeader([...'🍕'.repeat(Math.floor(innerWidth / 38))])
+  }
 
   useEffect(() => {
     fetch(FOODS_GET_API, {
@@ -18,8 +25,7 @@ const App = () => {
       .then((res) => res.json())
       .then((data) => {
         setFoods(data.items)
-        console.log(data.items)
-        setHasToast('🎉🎉 Data has fetched !!')
+        setHasToast('🎉🎉 Foods has fetched !!')
       })
   }, [])
 
@@ -31,7 +37,7 @@ const App = () => {
 
   return (
     <main>
-      <h1 className='text-2xl text-center p-4'>🍕🍕🍕🍕🍕🍕</h1>
+      <h1 className='text-2xl text-center p-4'>{header.map(() => '🍕')}</h1>
 
       <div className='container mx-auto px-4 max-w-[768px]'>
         <section className='text-center my-4'>

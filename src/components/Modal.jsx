@@ -46,7 +46,7 @@ export const Modal = ({ setIsModal, setFoods, setHasToast }) => {
 
   return (
     <section className='fixed inset-0 w-full h-full bg-zinc-900 bg-opacity-60 grid place-content-center'>
-      <div className='bg-zinc-300 w-[calc(100vw_-_3rem)] sm:w-96 rounded-md relative'>
+      <div className='bg-zinc-300 w-[calc(100vw_-_2rem)] sm:w-96 rounded-md relative'>
         <h2 className='text-xl font-semibold p-4'>
           <span className='text-3xl'>🍟</span> Add New Food..
         </h2>
